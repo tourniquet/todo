@@ -1,1 +1,13 @@
-Hello, world!
+{% extends "todo/base.html" %}
+
+{% block content %}
+<ul>
+  {% for entry in entries %}
+    <li>
+      <a href="{% url 'todo:entry' entry.id %}">{{ entry }}</a>
+    </li>
+  {% empty %}
+    <li>No topics have been added yet</li>
+  {% endfor %}
+</ul>
+{% endblock content %}
