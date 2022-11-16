@@ -1,6 +1,16 @@
 {% extends "todo/base.html" %}
 
 {% block content %}
+  <h2>{{ title }}</p>
+
+  <p>Add new entry:</p>
+  <form action="{% url 'todo:new_entry' %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="title" required>
+
+    <button name="submit">Add entry</button>
+  </form>
+
 <ul>
   {% for entry in entries %}
     <li>
