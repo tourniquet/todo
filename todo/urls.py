@@ -5,4 +5,5 @@ from . import views
 app_name = 'todo'
 urlpatterns = [
   path('', views.index, name='index'),
+  path('entry/<int:entry_id>/', views.entry, name='entry'),
 ]
