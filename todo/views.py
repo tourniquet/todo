@@ -12,7 +12,6 @@ def index(request):
 def entry(request, entry_id):
   entry = Entry.objects.get(id=entry_id)
   context = { 'entry': entry }
-  print(context)
   return render(request, 'todo/entry.html', context)
 
 
