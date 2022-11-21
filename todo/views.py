@@ -18,6 +18,7 @@ def entry(request, entry_id):
 
 def new_entry(request):
   title = request.POST['title']
-  Entry.objects.create(text=title)
+  owner = request.user
+  Entry.objects.create(text=title, owner=owner)
 
   return redirect('todo:index')
