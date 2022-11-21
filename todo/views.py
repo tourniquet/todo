@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 from .models import Entry
 
 def index(request):
-  entries = Entry.objects.order_by('-date_added')
+  owner = request.user
+  entries = Entry.objects.filter(owner=owner).order_by('-date_added')
   context = { 'entries': entries }
   return render(request, 'todo/index.html', context)
 
