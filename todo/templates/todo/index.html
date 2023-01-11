@@ -3,21 +3,25 @@
 {% block content %}
   <h2>{{ title }}</p>
 
-  <p>Add new entry:</p>
-  <form action="{% url 'todo:new_entry' %}" method="POST">
-    {% csrf_token %}
-    <input type="text" name="title" required>
+  {% if user.is_authenticated %}
+    <p>Add new entry:</p>
 
-    <button name="submit">Add entry</button>
-  </form>
+    <form action="{% url 'todo:new_entry' %}" method="POST">
+      {% csrf_token %}
+      <input type="text" name="title" required>
 
-<ul>
-  {% for entry in entries %}
-    <li>
-      <a href="{% url 'todo:entry' entry.id %}">{{ entry }}</a>
-    </li>
-  {% empty %}
-    <li>No topics have been added yet</li>
-  {% endfor %}
-</ul>
+      <button name="submit">Add entry</button>
+    </form>
+
+    <ul>
+      {% for entry in entries %}
+        <li>
+          <input type="checkbox" value="{{entry.id}}">
+          <a href="{% url 'todo:entry' entry.id %}">{{ entry }}</a>
+        </li>
+      {% empty %}
+        <li>No topics have been added yet</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 {% endblock content %}
