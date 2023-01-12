@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from datetime import datetime
 
 from .models import Entry
 
@@ -17,7 +18,8 @@ def entry(request, entry_id):
 
 def new_entry(request):
   title = request.POST['title']
-  owner = request.user.id
-  Entry.objects.create(text=title, owner=owner)
+  due_by = datetime.strptime(request.POST['due'], '%Y-%m-%d')
+  owner = request.user
+  Entry.objects.create(text=title, due_by=due_by, owner=owner)
 
   return redirect('todo:index')

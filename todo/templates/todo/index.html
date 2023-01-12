@@ -9,6 +9,7 @@
     <form action="{% url 'todo:new_entry' %}" method="POST">
       {% csrf_token %}
       <input type="text" name="title" required>
+      <input type="date" name="due">
 
       <button name="submit">Add entry</button>
     </form>
@@ -17,7 +18,7 @@
       {% for entry in entries %}
         <li>
           <input type="checkbox" value="{{entry.id}}">
-          <a href="{% url 'todo:entry' entry.id %}">{{ entry }}</a>
+          <a href="{% url 'todo:entry' entry.id %}">{{ entry }} Due by: {{entry.due_by}}</a>
         </li>
       {% empty %}
         <li>No topics have been added yet</li>
