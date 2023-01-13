@@ -17,14 +17,19 @@
     <ul>
       {% for entry in entries %}
         <li>
-          <a href="{% url 'todo:entry' entry.id %}">{{ entry }} Due by: {{entry.due_by}}</a>
-          <input
-            type="checkbox"
-            value="{{entry.id}}"
-            {% if entry.is_completed %}
-              checked
-              disabled
-            {% endif %}>
+          <form style="display: inline;" method="post" action="{% url 'todo:complete' entry.id %}">
+            {% csrf_token %}
+
+            <input
+              type="checkbox"
+              value="{{entry.id}}"
+              onchange="this.form.submit()"
+              {% if entry.is_completed %}
+                checked
+                disabled
+              {% endif %}>
+          </form>
+          <a href="{% url 'todo:entry' entry.id %}">{{entry}} Due by: {{entry.due_by}}</a>
         </li>
       {% empty %}
         <li>No topics have been added yet</li>
