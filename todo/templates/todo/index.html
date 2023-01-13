@@ -17,8 +17,14 @@
     <ul>
       {% for entry in entries %}
         <li>
-          <input type="checkbox" value="{{entry.id}}">
           <a href="{% url 'todo:entry' entry.id %}">{{ entry }} Due by: {{entry.due_by}}</a>
+          <input
+            type="checkbox"
+            value="{{entry.id}}"
+            {% if entry.is_completed %}
+              checked
+              disabled
+            {% endif %}>
         </li>
       {% empty %}
         <li>No topics have been added yet</li>

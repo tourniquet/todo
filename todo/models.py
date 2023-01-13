@@ -9,6 +9,7 @@ class Entry(models.Model):
   text = models.TextField()
   date_added = models.DateTimeField(auto_now_add=True)
   due_by = models.DateTimeField(default=one_week)
+  is_completed = models.BooleanField(default=False)
   owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
   class Meta:
